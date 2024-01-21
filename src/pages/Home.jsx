@@ -15,23 +15,21 @@ const Home = () => {
   const onSearch = async ev => {
     ev.preventDefault();
 
-    try{
+    try {
       setApiDataError(null);
       const result = await searchForShows(searchStr);
       setApiData(result);
-    }catch(error){
+    } catch (error) {
       setApiDataError(error);
     }
-
-
   };
 
   const renderApiData = () => {
-    if(apiDataError){
-      return <div>Error occured: {apiDataError.message}</div>
+    if (apiDataError) {
+      return <div>Error occured: {apiDataError.message}</div>;
     }
 
-    if(apiData){
+    if (apiData) {
       return apiData.map(data => (
         <div key={data.show.id}>{data.show.name}</div>
       ));
@@ -46,9 +44,7 @@ const Home = () => {
         <input type="text" value={searchStr} onChange={onSearchInputChange} />
         <button type="submit">Search</button>
       </form>
-      <div>
-        {renderApiData()}
-      </div>
+      <div>{renderApiData()}</div>
     </div>
   );
 };
