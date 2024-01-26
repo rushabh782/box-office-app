@@ -1,28 +1,28 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useSearchStr } from '../lib/useSearchStr';
 
+const SearchForm = ({ onSearch }) => {
+  const [searchStr, setSearchStr] = useSearchStr();
+  const [searchOption, setSearchOption] = useState('shows');
 
-const SearchForm = ( {onSearch} ) => {
-    const [searchStr, setSearchStr] = useState('');
-    const [searchOption, setSearchOption] = useState('shows');
+  const onSearchInputChange = ev => {
+    setSearchStr(ev.target.value);
+  };
 
-    const onSearchInputChange = ev => {
-        setSearchStr(ev.target.value);
-      };
-    
-      const onRadioChange = ev => {
-        setSearchOption(ev.target.value);
-      };
+  const onRadioChange = ev => {
+    setSearchOption(ev.target.value);
+  };
 
-      const onSubmit = (ev) => {
-        ev.preventDefault();
+  const onSubmit = ev => {
+    ev.preventDefault();
 
-        const options = {
-            q: searchStr,
-            searchOption
-        }
+    const options = {
+      q: searchStr,
+      searchOption,
+    };
 
-        onSearch(options);
-      };
+    onSearch(options);
+  };
 
   return (
     <form onSubmit={onSubmit}>
